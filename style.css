@@ -21,7 +21,9 @@ body {
 #gameboard {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(3, minmax(200px, 1fr) ) ;
+    /* grid-template-columns: repeat(3, minmax(200px, 1fr) ) ; */
+    grid-template-columns: repeat(3, 200px);
+    justify-content: center;
 }
 
 .square {
@@ -30,6 +32,7 @@ body {
     color: #fff;
     cursor: pointer;
     font-size: 150%;
+    height: 76px;
     padding: 20px;
     text-align: center;
 }

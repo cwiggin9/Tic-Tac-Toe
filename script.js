@@ -20,15 +20,22 @@ const displayController = (() => {
     let currentPlayer = X;
 
     AddMark = (event) => {
-        event.currentTarget.textContent = currentPlayer.mark;
-        currentPlayer = currentPlayer === X ? O : X
+        if(event.currentTarget.textContent === ""){
+            event.currentTarget.textContent = currentPlayer.mark;
+            currentPlayer = currentPlayer === X ? O : X
+            RenderContents();
+        };
     }
 
     return { AddMark }
 })();
 
 const gameboard = document.getElementById("gameboard");
+
 const squares = document.querySelectorAll(".square");
+squares.forEach(square => {
+    square.addEventListener("click", displayController.AddMark);
+});
 
 function RenderContents() {
     const boardRef = gameBoard.gameboard;
@@ -36,14 +43,14 @@ function RenderContents() {
 
     for(let i = 0; i < boardRef.length; i++){
         for(let j = 0; j < boardRef.length; j++){
-            squares[counter].textContent = boardRef[i][j];
+            boardRef[i][j] = squares[counter].textContent;
             counter++;
         }
     }
 };
 
-RenderContents();
-
-squares.forEach(square => {
-    square.addEventListener("click", displayController.AddMark);
-});
+function RemoveListeners(){
+    squares.forEach(square => {
+        square.removeEventListener("click", displayController.AddMark);
+    });
+}
