@@ -25,7 +25,10 @@ const displayController = (() => {
 
             RenderContents(event, currentPlayer.mark);
 
-            if(WinCheck() == true) RemoveListeners();
+            if(WinCheck() == true) {
+                document.getElementById("game-message").textContent = "You win!";
+                RemoveListeners();
+            }
         };
     }
     return { AddMark }
