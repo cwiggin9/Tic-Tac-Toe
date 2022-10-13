@@ -81,3 +81,8 @@ body {
 .button-31:focus {
   opacity: .75;
 }
+
+#game-message {
+    margin-top: 1rem;
+    font-size: 24px;
+}

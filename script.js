@@ -1,3 +1,5 @@
+const squares = document.querySelectorAll(".square");
+
 const gameBoard = (() => {
     let gameboard = [
         ['A', 'AA', 'AAA'],
@@ -26,7 +28,7 @@ const displayController = (() => {
             RenderContents(event, currentPlayer.mark);
 
             if(WinCheck() == true) {
-                document.getElementById("game-message").textContent = "You win!";
+                document.getElementById("game-message").textContent = `${currentPlayer.mark} wins!`;
                 RemoveListeners();
             }
         };
@@ -35,10 +37,29 @@ const displayController = (() => {
 })();
 
 // Adds 'click' listeners to grid elements
-const squares = document.querySelectorAll(".square");
-squares.forEach(square => {
-    square.addEventListener("click", displayController.AddMark);
-});
+function StartGame(){
+    squares.forEach(square => {
+        square.addEventListener("click", displayController.AddMark);
+    });
+
+    //disable start game button
+    const startBtn = document.getElementById("start-button");
+    startBtn.setAttribute("style", "opacity: 10%; cursor: default;");
+    startBtn.disabled = true;
+}
+
+function ResetGame(){
+    gameBoard.gameboard = [
+        ['A', 'AA', 'AAA'],
+        ['B', 'BB', 'BBB'],
+        ['C', 'CC', 'CCC']
+    ];
+    squares.forEach(square => {
+        square.textContent = "";
+    });
+    document.getElementById("game-message").textContent = "";
+    StartGame();
+}
 
 // A function that removes the 'click' listeners from the grid elements
 function RemoveListeners(){
